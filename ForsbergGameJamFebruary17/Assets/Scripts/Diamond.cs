@@ -42,7 +42,7 @@ public class Diamond : MonoBehaviour
 
 			if (_currentHealth <= 0)
 			{
-				_fracturedObject.Explode(transform.position, 100f);
+				_fracturedObject.Explode(c.transform.position, 100f);
 			}
 		}
 	}
