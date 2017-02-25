@@ -18,11 +18,17 @@ public class Turret : MoveableBase
 
 	[Header("Projectile")]
 	public GameObject ProjecitlePrefab;
-	public GameObject Spawn1;
-	public GameObject Spawn2;
+	public GameObject SpawnLeft;
+	public GameObject SpawnRight;
+	public float Cooldown = 1;
 
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
+	private bool _isFiringLeft;
+	private bool _isFiringRight;
+	private float _currentCooldownLeft;
+	private float _currentCooldownRight;
+
 
 	#endregion
 	#region Events
@@ -45,6 +51,22 @@ public class Turret : MoveableBase
 
 		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
 		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
+	}
+
+	void FixedUpdate()
+	{
+		if (_isFiringLeft)
+		{
+			InstantiateProjectile(SpawnLeft);
+
+			_isFiringLeft = false;
+		}
+
+		if (_isFiringRight)
+		{
+			InstantiateProjectile(SpawnRight);
+			_isFiringRight = false;
+		}
 	}
 
 	#endregion
@@ -71,14 +93,29 @@ public class Turret : MoveableBase
 
 	private void Fire()
 	{
-		if (Trigger == 1)
+		Debug.Log(TriggerRaw);
+
+		if (!_isFiringLeft && _currentCooldownLeft <= 0 && TriggerRaw < 0)
 		{
-			Debug.Log("Fire Right!");
+			_isFiringLeft = true;
+			_currentCooldownLeft = Cooldown;
 		}
-		else if (Trigger == -1)
-		{
-			Debug.Log("Fire Left!");
+		else if (!_isFiringRight && _currentCooldownRight <= 0 && Trigger > 0)
+		{			
+			_isFiringRight = true;
+			_currentCooldownRight = Cooldown;
 		}
+
+		_currentCooldownLeft -= Time.deltaTime;
+		_currentCooldownRight -= Time.deltaTime;
+	}
+
+	private void InstantiateProjectile(GameObject spawn)
+	{
+		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
+		var projectileRigidbody = go.GetComponent<Rigidbody>();
+
+		projectileRigidbody.AddForce(go.transform.forward * 10f, ForceMode.Impulse);
 	}
 
 	#endregion
