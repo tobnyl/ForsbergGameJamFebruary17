@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spaceship : MonoBehaviour {
+public class Spaceship : MoveableBase {
 
 	#region Fields/Properties
-
-	public int Index = 1;
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -23,20 +21,7 @@ public class Spaceship : MonoBehaviour {
 	private Rigidbody _rigidbody;
 	private Transform _transform;
 
-	private Vector2 AxisLeft
-	{
-		get { return new Vector3(Input.GetAxis("HorizontalLeft" + Index), -Input.GetAxis("VerticalLeft" + Index)); }
-	}
-
-	private Vector2 AxisRight
-	{
-		get { return new Vector3(Input.GetAxis("HorizontalRight" + Index), Input.GetAxis("VerticalRight" + Index)); }
-	}
-
-	private float Trigger
-	{
-		get { return Input.GetAxis("TriggerRight1") * -1; }
-	}
+	
 
 	#endregion
 	#region Events
