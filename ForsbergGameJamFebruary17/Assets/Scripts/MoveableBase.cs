@@ -7,6 +7,13 @@ public class MoveableBase : MonoBehaviour
 
 	public int Index;
 
+	[Header("Projectile")]
+	public GameObject ProjecitlePrefab;
+	public GameObject SpawnLeft;
+	public GameObject SpawnRight;
+	public float ProjectileForce = 10f;
+	public float Cooldown = 1;
+
 	protected Vector2 AxisLeft
 	{
 		get { return new Vector2(Input.GetAxis("HorizontalLeft" + Index), -Input.GetAxis("VerticalLeft" + Index)); }

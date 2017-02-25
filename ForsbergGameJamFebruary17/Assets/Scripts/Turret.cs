@@ -16,12 +16,12 @@ public class Turret : MoveableBase
 	public float CannonSlerpSpeedX = 1f;
 	public Vector2 CannonAngleLimit;
 
-	[Header("Projectile")]
-	public GameObject ProjecitlePrefab;
-	public GameObject SpawnLeft;
-	public GameObject SpawnRight;
-	public float ProjectileForce = 10f;
-	public float Cooldown = 1;
+	//[Header("Projectile")]
+	//public GameObject ProjecitlePrefab;
+	//public GameObject SpawnLeft;
+	//public GameObject SpawnRight;
+	//public float ProjectileForce = 10f;
+	//public float Cooldown = 1;
 
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
