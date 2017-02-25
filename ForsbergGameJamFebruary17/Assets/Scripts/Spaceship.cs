@@ -6,6 +6,8 @@ public class Spaceship : MoveableBase {
 
 	#region Fields/Properties
 
+	public GameObject Mesh;
+
 	[Header("Force")]
 	public float ForwardForce = 1;
 
@@ -73,13 +75,15 @@ public class Spaceship : MoveableBase {
 	{
 		var projectile = c.gameObject.GetComponentInParent<Projectile>();
 
-		Debug.Log("YEs?");
-
 		if (projectile != null)
 		{
-			Debug.Log("YEeeeeeeeeeeeeeeeeees?");
 			_currentHealth -= projectile.DamageAmount;
 			Destroy(c.transform.parent.gameObject);
+
+			if (_currentHealth <= 0)
+			{
+				Destroy(Mesh);
+			}
 		}
 	}
 
