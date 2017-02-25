@@ -20,6 +20,7 @@ public class Turret : MoveableBase
 	public GameObject ProjecitlePrefab;
 	public GameObject SpawnLeft;
 	public GameObject SpawnRight;
+	public float ProjectileForce = 10f;
 	public float Cooldown = 1;
 
 	private float _currentBaseAngleY;
@@ -115,7 +116,7 @@ public class Turret : MoveableBase
 		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
 		var projectileRigidbody = go.GetComponent<Rigidbody>();
 
-		projectileRigidbody.AddForce(go.transform.forward * 10f, ForceMode.Impulse);
+		projectileRigidbody.AddForce(go.transform.forward * ProjectileForce, ForceMode.Impulse);
 	}
 
 	#endregion
