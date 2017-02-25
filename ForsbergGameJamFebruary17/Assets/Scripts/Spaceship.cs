@@ -66,13 +66,17 @@ public class Spaceship : MonoBehaviour {
 		if (_rigidbody.velocity.magnitude > MaxVelocity)
 		{
 			_rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
+
 		}
 
-		_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
+		if (Trigger > 0)
+		{
+			_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
+		}
 
-		//_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
+		_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
 		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
-		//_rigidbody.AddTorque(transform.forward * (-AxisLeft.x) * RollTorque);
+		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
 
 	}
