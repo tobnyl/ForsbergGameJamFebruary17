@@ -18,10 +18,8 @@ public class Turret : MoveableBase
 
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
-	private bool _isFiringLeft;
-	private bool _isFiringRight;
-	private float _currentCooldownLeft;
-	private float _currentCooldownRight;
+		
+
 
 
 	#endregion
@@ -74,25 +72,6 @@ public class Turret : MoveableBase
 		
 		var newRotationX = Quaternion.AngleAxis(_currentCannonAngleX, Base.transform.right) * Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 		Head.transform.rotation = Quaternion.Slerp(Head.transform.rotation, newRotationX, Time.deltaTime * CannonSlerpSpeedX);
-	}
-
-	private void Fire()
-	{
-		if (!_isFiringRight && _currentCooldownRight <= 0 && FireButtonDown)
-		{			
-			_isFiringRight = true;
-			_currentCooldownRight = Cooldown;
-		}
-
-		_currentCooldownRight -= Time.deltaTime;
-	}
-
-	private void InstantiateProjectile(GameObject spawn)
-	{
-		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
-		var projectileRigidbody = go.GetComponent<Rigidbody>();
-
-		projectileRigidbody.AddForce(go.transform.forward * ProjectileForce, ForceMode.Impulse);
 	}
 
 	#endregion

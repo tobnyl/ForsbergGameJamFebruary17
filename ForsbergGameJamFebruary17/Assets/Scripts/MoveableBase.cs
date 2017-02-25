@@ -14,6 +14,9 @@ public class MoveableBase : MonoBehaviour
 	public float ProjectileForce = 10f;
 	public float Cooldown = 1;
 
+	protected bool _isFiringRight;
+	protected float _currentCooldownRight;
+
 	protected Vector2 AxisLeft
 	{
 		get { return new Vector2(Input.GetAxis("HorizontalLeft" + Index), -Input.GetAxis("VerticalLeft" + Index)); }
@@ -56,12 +59,32 @@ public class MoveableBase : MonoBehaviour
 	{
 	
 	}
-	
+
 	#endregion
 	#region Methods
-	
-	
-	
+
+	protected void Fire()
+	{
+		if (!_isFiringRight && _currentCooldownRight <= 0 && FireButtonDown)
+		{
+			_isFiringRight = true;
+			_currentCooldownRight = Cooldown;
+		}
+
+		_currentCooldownRight -= Time.deltaTime;
+	}
+
+	protected void InstantiateProjectile(GameObject spawn)
+	{
+		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
+		var projectileRigidbody = go.GetComponent<Rigidbody>();
+		var collider = go.GetComponentInChildren<Collider>();
+
+		projectileRigidbody.AddForce(go.transform.forward * ProjectileForce, ForceMode.Impulse);
+
+		//Physics.IgnoreCollision(c, collider);
+	}
+
 	#endregion
-	
+
 }

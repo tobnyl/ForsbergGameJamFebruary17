@@ -10,6 +10,7 @@ public class Spaceship : MoveableBase {
 
 	[Header("Force")]
 	public float ForwardForce = 1;
+	public float IdleForce = 1;
 
 	[Header("Torque")]
 	public float PitchTorque = 1;
@@ -24,6 +25,7 @@ public class Spaceship : MoveableBase {
 	public int StartHealth = 100;
 	[ReadOnly, SerializeField]
 	private int _currentHealth;
+	private Collider _collider;
 
 	private Rigidbody _rigidbody;
 
@@ -36,6 +38,7 @@ public class Spaceship : MoveableBase {
 		_rigidbody.maxAngularVelocity = MaxAngularVelocity;
 
 		_currentHealth = StartHealth;
+		_collider = Mesh.GetComponent<Collider>();
 	}
 
 	void Start()
@@ -44,6 +47,7 @@ public class Spaceship : MoveableBase {
 
 	void Update()
 	{
+		Fire();
 		//Debug.Log(Trigger);
 
 		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
@@ -63,19 +67,29 @@ public class Spaceship : MoveableBase {
 		{
 			_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
 		}
+		else
+		{
+			_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
+		}
 
 		_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
 		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
 		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
-
+		if (_isFiringRight)
+		{
+			
+			InstantiateProjectile(SpawnLeft);
+			InstantiateProjectile(SpawnRight);
+			_isFiringRight = false;
+		}
 	}
 
 	void OnTriggerEnter(Collider c)
 	{
 		var projectile = c.gameObject.GetComponentInParent<Projectile>();
 
-		if (projectile != null)
+		if (projectile != null && projectile.gameObject.layer == Layers.TurretProjectile.Index)
 		{
 			_currentHealth -= projectile.DamageAmount;
 			Destroy(c.transform.parent.gameObject);

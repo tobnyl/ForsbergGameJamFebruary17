@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 public static class Layers
 {	
-	public static readonly PhysicsLayer Projectile = new PhysicsLayer("Projectile");
+	public static readonly PhysicsLayer TurretProjectile = new PhysicsLayer("TurretProjectile");
+	public static readonly PhysicsLayer SpaceshipProjectile = new PhysicsLayer("SpaceshipProjectile");
 	public static readonly PhysicsLayer Ground = new PhysicsLayer("Ground");
 }
 
