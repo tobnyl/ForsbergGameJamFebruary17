@@ -9,20 +9,15 @@ public class Projectile : MonoBehaviour
 	
 	#endregion
 	#region Events
-	
-	void Awake()
-	{
-		
-	}
-	
-	void Start() 
-	{
-	
-	}
 
-	void Update() 
+	void OnCollisionEnter(Collision c)
 	{
-	
+		Debug.Log("Something!");
+
+		if (c.gameObject.layer == Layers.Ground.Index)
+		{
+			Destroy(gameObject);
+		}
 	}
 	
 	#endregion

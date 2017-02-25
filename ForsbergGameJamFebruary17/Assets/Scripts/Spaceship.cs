@@ -79,7 +79,7 @@ public class Spaceship : MoveableBase {
 		{
 			Debug.Log("YEeeeeeeeeeeeeeeeeees?");
 			_currentHealth -= projectile.DamageAmount;
-			Destroy(c.gameObject);
+			Destroy(c.transform.parent.gameObject);
 		}
 	}
 

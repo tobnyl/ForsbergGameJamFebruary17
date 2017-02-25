@@ -56,15 +56,16 @@ public class Turret : MoveableBase
 
 	void FixedUpdate()
 	{
-		if (_isFiringLeft)
-		{
-			InstantiateProjectile(SpawnLeft);
-
-			_isFiringLeft = false;
-		}
+		//if (_isFiringLeft)
+		//{
+		//	InstantiateProjectile(SpawnLeft);
+		//	InstantiateProjectile(SpawnRight);
+		//	_isFiringLeft = false;
+		//}
 
 		if (_isFiringRight)
 		{
+			InstantiateProjectile(SpawnLeft);
 			InstantiateProjectile(SpawnRight);
 			_isFiringRight = false;
 		}
@@ -94,25 +95,25 @@ public class Turret : MoveableBase
 
 	private void Fire()
 	{
-		if (!_isFiringLeft && _currentCooldownLeft <= 0 && TriggerRaw < 0)
-		{
-			_isFiringLeft = true;
-			_currentCooldownLeft = Cooldown;
-		}
-		else if (!_isFiringRight && _currentCooldownRight <= 0 && Trigger > 0)
+		//if (!_isFiringLeft && _currentCooldownLeft <= 0 && TriggerRaw < 0)
+		//{
+		//	_isFiringLeft = true;
+		//	_currentCooldownLeft = Cooldown;
+		//}
+		if (!_isFiringRight && _currentCooldownRight <= 0 && Trigger > 0)
 		{			
 			_isFiringRight = true;
 			_currentCooldownRight = Cooldown;
 		}
 
-		_currentCooldownLeft -= Time.deltaTime;
+		//_currentCooldownLeft -= Time.deltaTime;
 		_currentCooldownRight -= Time.deltaTime;
 	}
 
 	private void InstantiateProjectile(GameObject spawn)
 	{
 		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
-		var projectileRigidbody = go.GetComponentInChildren<Rigidbody>();
+		var projectileRigidbody = go.GetComponent<Rigidbody>();
 
 		projectileRigidbody.AddForce(go.transform.forward * ProjectileForce, ForceMode.Impulse);
 	}

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public static class Layers
 {	
 	public static readonly PhysicsLayer Projectile = new PhysicsLayer("Projectile");
-
+	public static readonly PhysicsLayer Ground = new PhysicsLayer("Ground");
 }
 
 public struct PhysicsLayer
