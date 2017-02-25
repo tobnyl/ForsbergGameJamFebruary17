@@ -38,7 +38,7 @@ public class Turret : MoveableBase
 		RotateCannon();
 
 		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
-		Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
+		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
 	}
 
 	#endregion
@@ -47,20 +47,21 @@ public class Turret : MoveableBase
 	private void RotateBase()
 	{
 		_currentBaseAngleY += AxisLeft.x * BaseRotationSpeedY;
+		//_currentBaseAngleY = Mathf.Clamp(_currentBaseAngleY, BaseCanonAngleLimit.x, BaseCanonAngleLimit.y);
 
 		var newRotationY = Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 
-		Base.transform.rotation = Quaternion.Slerp(Base.transform.rotation, newRotationY, Time.deltaTime * BaseSlerpSpeedY);		
+		Base.transform.rotation = Quaternion.Slerp(Base.transform.rotation, newRotationY, Time.deltaTime * BaseSlerpSpeedY);
+		//CaptainRat.transform.rotation = Base.transform.rotation * Quaternion.Euler(0, 90, 0);
 	}
 
 	private void RotateCannon()
 	{
-		_currentCannonAngleX += (-AxisRight.y) * CannonRotationSpeedX;
+		_currentCannonAngleX += AxisRight.y * CannonRotationSpeedX;
 
 		_currentCannonAngleX = Mathf.Clamp(_currentCannonAngleX, CannonAngleLimit.x, CannonAngleLimit.y);
 		Debug.Log(_currentCannonAngleX);
-
-		var newRotationX = Quaternion.AngleAxis(_currentCannonAngleX, Base.transform.right);
+		var newRotationX = Quaternion.AngleAxis(_currentCannonAngleX, Base.transform.right) * Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 		Head.transform.rotation = Quaternion.Slerp(Head.transform.rotation, newRotationX, Time.deltaTime * CannonSlerpSpeedX);
 	}
 
