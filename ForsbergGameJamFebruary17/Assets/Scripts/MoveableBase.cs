@@ -9,12 +9,12 @@ public class MoveableBase : MonoBehaviour
 
 	protected Vector2 AxisLeft
 	{
-		get { return new Vector3(Input.GetAxis("HorizontalLeft" + Index), -Input.GetAxis("VerticalLeft" + Index)); }
+		get { return new Vector2(Input.GetAxis("HorizontalLeft" + Index), -Input.GetAxis("VerticalLeft" + Index)); }
 	}
 
 	protected Vector2 AxisRight
 	{
-		get { return new Vector3(Input.GetAxis("HorizontalRight" + Index), Input.GetAxis("VerticalRight" + Index)); }
+		get { return new Vector2(Input.GetAxis("HorizontalRight" + Index), Input.GetAxis("VerticalRight" + Index)); }
 	}
 
 	protected float Trigger
