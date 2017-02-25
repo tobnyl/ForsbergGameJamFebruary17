@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
     #region Fields/Properties
 
     public float DestroyItemAfterTime;
+	public GameObject DetachedChunkParent;
 
-    public Audio Test;
+
+	public Audio Test;
 
     private static GameManager _instance;
 

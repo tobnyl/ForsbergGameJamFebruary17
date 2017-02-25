@@ -59,8 +59,6 @@ public class Turret : MoveableBase
 	{
 		var projectile = c.gameObject.GetComponentInParent<Projectile>();
 
-		Debug.Log("Hello?");
-
 		if (projectile != null && projectile.gameObject.layer == Layers.SpaceshipProjectile.Index)
 		{
 			_currentHealth -= projectile.DamageAmount;

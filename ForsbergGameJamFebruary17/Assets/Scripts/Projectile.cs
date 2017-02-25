@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
 
 	void OnCollisionEnter(Collision c)
 	{
-		Debug.Log("ProjectileColl: " + c.gameObject.name);
+		//Debug.Log("ProjectileColl: " + c.gameObject.name);
 
 		if (c.gameObject.layer == Layers.Ground.Index)
 		{
