@@ -8,14 +8,13 @@ public class Turret : MoveableBase
 	[Header("Base")]
 	public GameObject Base;
 	public float BaseRotationSpeedY = 10f;
-	public float BaseSlerpSpeedY = 1f;
-	public Vector2 BaseAngleLimit;
+	public float BaseSlerpSpeedY = 1f;	
 
 	[Header("Head")]
 	public GameObject Head;
 
 	private float _currentBaseAngleY;
-	private float _currentCanonAngleX;
+	private float _currentCannonAngleX;
 
 	#endregion
 	#region Events
@@ -33,6 +32,9 @@ public class Turret : MoveableBase
 	void Update() 
 	{
 		RotateBaseCannon();
+
+		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
+		Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
 	}
 
 	#endregion
@@ -41,7 +43,10 @@ public class Turret : MoveableBase
 	private void RotateBaseCannon()
 	{
 		_currentBaseAngleY += AxisRight.x * BaseRotationSpeedY;
-		_currentBaseAngleY = Mathf.Clamp(_currentBaseAngleY, BaseAngleLimit.x, BaseAngleLimit.y);
+
+		Debug.Log(_currentBaseAngleY);
+
+		//_currentBaseAngleY = Mathf.Clamp(_currentBaseAngleY, BaseAngleLimit.x, BaseAngleLimit.y);
 
 		var newRotationY = Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 

@@ -39,7 +39,7 @@ public class Spaceship : MoveableBase {
 
 	void Update()
 	{
-		Debug.Log(Trigger);
+		//Debug.Log(Trigger);
 
 		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
 		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
