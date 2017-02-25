@@ -18,10 +18,12 @@ public class Spaceship : MoveableBase {
 	public float MaxVelocity = 20;
 	public float MaxAngularVelocity = 1;
 
-	private Rigidbody _rigidbody;
-	private Transform _transform;
+	[Header("Health")]
+	public int StartHealth = 100;
+	[ReadOnly, SerializeField]
+	private int _currentHealth;
 
-	
+	private Rigidbody _rigidbody;
 
 	#endregion
 	#region Events
@@ -30,11 +32,12 @@ public class Spaceship : MoveableBase {
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_rigidbody.maxAngularVelocity = MaxAngularVelocity;
+
+		_currentHealth = StartHealth;
 	}
 
 	void Start()
 	{
-		_transform = transform;
 	}
 
 	void Update()
@@ -64,6 +67,20 @@ public class Spaceship : MoveableBase {
 		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
 
+	}
+
+	void OnTriggerEnter(Collider c)
+	{
+		var projectile = c.gameObject.GetComponentInParent<Projectile>();
+
+		Debug.Log("YEs?");
+
+		if (projectile != null)
+		{
+			Debug.Log("YEeeeeeeeeeeeeeeeeees?");
+			_currentHealth -= projectile.DamageAmount;
+			Destroy(c.gameObject);
+		}
 	}
 
 	#endregion

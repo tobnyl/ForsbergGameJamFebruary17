@@ -6,13 +6,8 @@ using System.Collections.Generic;
 
 public static class Layers
 {	
-	public static readonly PhysicsLayer Player = new PhysicsLayer("Player");
-	public static readonly PhysicsLayer Pickupable = new PhysicsLayer("Pickupable");
-	public static readonly PhysicsLayer Pillar = new PhysicsLayer("Pillar");
-	public static readonly PhysicsLayer Carried = new PhysicsLayer("Carried");
-    public static readonly PhysicsLayer Floor = new PhysicsLayer("Floor");
-	public static readonly PhysicsLayer Chunk = new PhysicsLayer("Chunk");
-	public static readonly PhysicsLayer Scenery = new PhysicsLayer("Scenery");
+	public static readonly PhysicsLayer Projectile = new PhysicsLayer("Projectile");
+
 }
 
 public struct PhysicsLayer

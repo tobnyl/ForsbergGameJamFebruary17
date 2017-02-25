@@ -94,8 +94,6 @@ public class Turret : MoveableBase
 
 	private void Fire()
 	{
-		Debug.Log(TriggerRaw);
-
 		if (!_isFiringLeft && _currentCooldownLeft <= 0 && TriggerRaw < 0)
 		{
 			_isFiringLeft = true;
