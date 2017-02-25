@@ -1,5 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Turret : MoveableBase 
 {
@@ -18,7 +20,7 @@ public class Turret : MoveableBase
 
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
-		
+	private List<MeshRenderer> _meshRenderers;
 
 
 
@@ -27,7 +29,8 @@ public class Turret : MoveableBase
 
 	void Awake()
 	{
-		
+		_meshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
+		_currentHealth = StartHealth;
 	}
 	
 	void Start() 
@@ -49,6 +52,27 @@ public class Turret : MoveableBase
 			InstantiateProjectile(SpawnLeft);
 			InstantiateProjectile(SpawnRight);
 			_isFiringRight = false;
+		}
+	}
+
+	void OnTriggerEnter(Collider c)
+	{
+		var projectile = c.gameObject.GetComponentInParent<Projectile>();
+
+		Debug.Log("Hello?");
+
+		if (projectile != null && projectile.gameObject.layer == Layers.SpaceshipProjectile.Index)
+		{
+			_currentHealth -= projectile.DamageAmount;
+			Destroy(c.transform.parent.gameObject);
+
+			if (_currentHealth <= 0)
+			{
+				foreach (var mr in _meshRenderers)
+				{
+					mr.enabled = false;
+				}
+			}
 		}
 	}
 

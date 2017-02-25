@@ -14,6 +14,11 @@ public class MoveableBase : MonoBehaviour
 	public float ProjectileForce = 10f;
 	public float Cooldown = 1;
 
+	[Header("Health")]
+	public int StartHealth = 100;
+	[ReadOnly, SerializeField]
+	protected int _currentHealth;
+
 	protected bool _isFiringRight;
 	protected float _currentCooldownRight;
 

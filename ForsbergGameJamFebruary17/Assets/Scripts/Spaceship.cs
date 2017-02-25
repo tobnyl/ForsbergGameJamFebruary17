@@ -21,10 +21,6 @@ public class Spaceship : MoveableBase {
 	public float MaxVelocity = 20;
 	public float MaxAngularVelocity = 1;
 
-	[Header("Health")]
-	public int StartHealth = 100;
-	[ReadOnly, SerializeField]
-	private int _currentHealth;
 	private Collider _collider;
 
 	private Rigidbody _rigidbody;
@@ -48,11 +44,6 @@ public class Spaceship : MoveableBase {
 	void Update()
 	{
 		Fire();
-		//Debug.Log(Trigger);
-
-		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
-		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
-		//Debug.LogFormat("Velocity: {0}", _rigidbody.velocity);
 	}
 
 	void FixedUpdate()
