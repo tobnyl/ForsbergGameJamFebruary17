@@ -34,6 +34,11 @@ public class MoveableBase : MonoBehaviour
 		get { return Input.GetAxisRaw("TriggerRight" + Index) * -1; }
 	}
 
+	protected bool FireButtonDown
+	{
+		get { return Input.GetButtonDown("Fire" + Index); }
+	}
+
 	#endregion
 	#region Events
 

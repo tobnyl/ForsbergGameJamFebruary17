@@ -78,7 +78,7 @@ public class Turret : MoveableBase
 
 	private void Fire()
 	{
-		if (!_isFiringRight && _currentCooldownRight <= 0 && Trigger > 0)
+		if (!_isFiringRight && _currentCooldownRight <= 0 && FireButtonDown)
 		{			
 			_isFiringRight = true;
 			_currentCooldownRight = Cooldown;
