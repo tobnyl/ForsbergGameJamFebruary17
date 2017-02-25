@@ -114,7 +114,7 @@ public class Turret : MoveableBase
 	private void InstantiateProjectile(GameObject spawn)
 	{
 		var go = ProjecitlePrefab.Instantiate(spawn.transform.position, spawn.transform.rotation) as GameObject;
-		var projectileRigidbody = go.GetComponent<Rigidbody>();
+		var projectileRigidbody = go.GetComponentInChildren<Rigidbody>();
 
 		projectileRigidbody.AddForce(go.transform.forward * ProjectileForce, ForceMode.Impulse);
 	}
