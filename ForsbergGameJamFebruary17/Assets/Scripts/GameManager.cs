@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 	
 	void Start() 
 	{
-        AudioManager.Instance.Play(Test, transform.position);
+        //AudioManager.Instance.Play(Test, transform.position);
 	}
 
 	void Update() 
