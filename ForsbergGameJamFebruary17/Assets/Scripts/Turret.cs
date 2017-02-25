@@ -16,13 +16,6 @@ public class Turret : MoveableBase
 	public float CannonSlerpSpeedX = 1f;
 	public Vector2 CannonAngleLimit;
 
-	//[Header("Projectile")]
-	//public GameObject ProjecitlePrefab;
-	//public GameObject SpawnLeft;
-	//public GameObject SpawnRight;
-	//public float ProjectileForce = 10f;
-	//public float Cooldown = 1;
-
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
 	private bool _isFiringLeft;
@@ -49,20 +42,10 @@ public class Turret : MoveableBase
 		RotateBase();
 		RotateCannon();
 		Fire();
-
-		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
-		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
 	}
 
 	void FixedUpdate()
 	{
-		//if (_isFiringLeft)
-		//{
-		//	InstantiateProjectile(SpawnLeft);
-		//	InstantiateProjectile(SpawnRight);
-		//	_isFiringLeft = false;
-		//}
-
 		if (_isFiringRight)
 		{
 			InstantiateProjectile(SpawnLeft);
@@ -95,18 +78,12 @@ public class Turret : MoveableBase
 
 	private void Fire()
 	{
-		//if (!_isFiringLeft && _currentCooldownLeft <= 0 && TriggerRaw < 0)
-		//{
-		//	_isFiringLeft = true;
-		//	_currentCooldownLeft = Cooldown;
-		//}
 		if (!_isFiringRight && _currentCooldownRight <= 0 && Trigger > 0)
 		{			
 			_isFiringRight = true;
 			_currentCooldownRight = Cooldown;
 		}
 
-		//_currentCooldownLeft -= Time.deltaTime;
 		_currentCooldownRight -= Time.deltaTime;
 	}
 
