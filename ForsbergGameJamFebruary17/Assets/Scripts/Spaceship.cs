@@ -52,19 +52,9 @@ public class Spaceship : MonoBehaviour {
 	{
 		_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
 
-
-		if (Mathf.Abs(AxisLeft.y) > 0.2)
-		{
-			_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
-		}
-		if (Mathf.Abs(AxisLeft.x) > 0.2)
-		{
-			_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
-		}
-		if (Mathf.Abs(AxisRight.x) > 0.2)
-		{
-			_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
-		}
+		_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
+		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
+		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 	}
 
 	#endregion
