@@ -16,6 +16,11 @@ public class Turret : MoveableBase
 	public float CannonSlerpSpeedX = 1f;
 	public Vector2 CannonAngleLimit;
 
+	[Header("Projectile")]
+	public GameObject ProjecitlePrefab;
+	public GameObject Spawn1;
+	public GameObject Spawn2;
+
 	private float _currentBaseAngleY;
 	private float _currentCannonAngleX;
 
@@ -36,6 +41,7 @@ public class Turret : MoveableBase
 	{
 		RotateBase();
 		RotateCannon();
+		Fire();
 
 		//Debug.LogFormat("AxisLeft: ({0}, {1})", AxisLeft.x, AxisLeft.y);
 		//Debug.LogFormat("AxisRight: ({0}, {1})", AxisRight.x, AxisRight.y);
@@ -47,12 +53,10 @@ public class Turret : MoveableBase
 	private void RotateBase()
 	{
 		_currentBaseAngleY += AxisLeft.x * BaseRotationSpeedY;
-		//_currentBaseAngleY = Mathf.Clamp(_currentBaseAngleY, BaseCanonAngleLimit.x, BaseCanonAngleLimit.y);
 
 		var newRotationY = Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 
 		Base.transform.rotation = Quaternion.Slerp(Base.transform.rotation, newRotationY, Time.deltaTime * BaseSlerpSpeedY);
-		//CaptainRat.transform.rotation = Base.transform.rotation * Quaternion.Euler(0, 90, 0);
 	}
 
 	private void RotateCannon()
@@ -60,9 +64,21 @@ public class Turret : MoveableBase
 		_currentCannonAngleX += AxisRight.y * CannonRotationSpeedX;
 
 		_currentCannonAngleX = Mathf.Clamp(_currentCannonAngleX, CannonAngleLimit.x, CannonAngleLimit.y);
-		Debug.Log(_currentCannonAngleX);
+		
 		var newRotationX = Quaternion.AngleAxis(_currentCannonAngleX, Base.transform.right) * Quaternion.AngleAxis(_currentBaseAngleY + transform.rotation.eulerAngles.y, Base.transform.up);
 		Head.transform.rotation = Quaternion.Slerp(Head.transform.rotation, newRotationX, Time.deltaTime * CannonSlerpSpeedX);
+	}
+
+	private void Fire()
+	{
+		if (Trigger == 1)
+		{
+			Debug.Log("Fire Right!");
+		}
+		else if (Trigger == -1)
+		{
+			Debug.Log("Fire Left!");
+		}
 	}
 
 	#endregion

@@ -19,7 +19,12 @@ public class MoveableBase : MonoBehaviour
 
 	protected float Trigger
 	{
-		get { return Input.GetAxis("TriggerRight1") * -1; }
+		get { return Input.GetAxis("TriggerRight" + Index) * -1; }
+	}
+
+	protected float TriggerRaw
+	{
+		get { return Input.GetAxisRaw("TriggerRight" + Index) * -1; }
 	}
 
 	#endregion
