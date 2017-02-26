@@ -10,6 +10,8 @@ public class Diamond : MonoBehaviour
 	[ReadOnly, SerializeField]
 	protected int _currentHealth;
 
+	public GameObject Collider;
+
 	private FracturedObject _fracturedObject;
 
 	#endregion
@@ -43,6 +45,7 @@ public class Diamond : MonoBehaviour
 			if (_currentHealth <= 0)
 			{
 				_fracturedObject.Explode(c.transform.position, 100f);
+				Destroy(Collider);
 			}
 		}
 	}
