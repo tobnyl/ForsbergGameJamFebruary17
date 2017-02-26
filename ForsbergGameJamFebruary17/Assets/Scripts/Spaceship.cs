@@ -63,7 +63,7 @@ public class Spaceship : MoveableBase {
 			_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
 		}
 
-		_rigidbody.AddTorque(transform.right * AxisLeft.y * PitchTorque);
+		_rigidbody.AddTorque(transform.right * -AxisLeft.y * PitchTorque);
 		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
 		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
