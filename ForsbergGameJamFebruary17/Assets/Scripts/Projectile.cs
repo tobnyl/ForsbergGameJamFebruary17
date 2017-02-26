@@ -6,9 +6,15 @@ public class Projectile : MonoBehaviour
 	#region Fields/Properties
 
 	public int DamageAmount = 10;
+	public float DestroyAfter = 5;
 	
 	#endregion
 	#region Events
+
+	void Awake()
+	{
+		Invoke("DestroyProjectile", DestroyAfter);
+	}
 
 	void OnCollisionEnter(Collision c)
 	{
@@ -23,7 +29,10 @@ public class Projectile : MonoBehaviour
 	#endregion
 	#region Methods
 	
-	
+	public void DestroyProjectile()
+	{
+		Destroy(gameObject);
+	}
 	
 	#endregion
 	
