@@ -11,6 +11,7 @@ public class Diamond : MonoBehaviour
 	protected int _currentHealth;
 
 	public GameObject Collider;
+	public float ExplosionForce = 1;
 
 	private FracturedObject _fracturedObject;
 
