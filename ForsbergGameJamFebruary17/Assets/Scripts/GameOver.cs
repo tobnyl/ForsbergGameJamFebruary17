@@ -6,14 +6,13 @@ public class GameOver : MonoBehaviour
 {
 	#region Fields/Properties
 
-	
-	
+	public UnityEngine.UI.Image Background;
+
 	#endregion
 	#region Events
-	
+
 	void Awake()
 	{
-		
 	}
 	
 	void Start() 
@@ -25,7 +24,15 @@ public class GameOver : MonoBehaviour
 	{
 		if (Input.GetButtonDown("Submit"))
 		{
+			Background.gameObject.SetActive(true);
+
 			SceneManager.LoadScene("Main");
+		}
+
+		if (Input.GetButtonDown("Cancel"))
+		{
+			Background.gameObject.SetActive(true);
+			SceneManager.LoadScene("StartScreen");
 		}
 	}
 	

@@ -6,14 +6,15 @@ public class StartScreen : MonoBehaviour
 {
 	#region Fields/Properties
 
-	
-	
+	public UnityEngine.UI.Image Background;
+
 	#endregion
 	#region Events
-	
+
 	void Awake()
 	{
-		
+		UnityEngine.Cursor.visible = false;
+		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void Start() 
@@ -25,6 +26,8 @@ public class StartScreen : MonoBehaviour
 	{
 		if (Input.GetButtonDown("Submit"))
 		{
+			Background.gameObject.SetActive(true);
+
 			SceneManager.LoadScene("Main");
 		}
 
