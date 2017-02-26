@@ -26,8 +26,9 @@ public class Spaceship : MoveableBase {
 	public float MaxAngularVelocity = 1;
 
 	private Collider _collider;
-
+	private FracturedObject _fracturedObject;
 	private Rigidbody _rigidbody;
+	private bool _isDead;
 
 	#endregion
 	#region Events
@@ -39,6 +40,7 @@ public class Spaceship : MoveableBase {
 
 		_currentHealth = StartHealth;
 		_collider = Mesh.GetComponent<Collider>();
+		_fracturedObject = GetComponentInChildren<FracturedObject>();
 	}
 
 	void Start()
@@ -48,37 +50,43 @@ public class Spaceship : MoveableBase {
 
 	void Update()
 	{
-		Fire();
+		if (!_isDead)
+		{
+			Fire();
+		}
 	}
 
 	void FixedUpdate()
 	{
-		if (_rigidbody.velocity.magnitude > MaxVelocity)
+		if (!_isDead)
 		{
-			_rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
+			if (_rigidbody.velocity.magnitude > MaxVelocity)
+			{
+				_rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
 
-		}
+			}
 
-		if (Trigger > 0)
-		{
-			_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
-		}
-		else
-		{
-			_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
-		}
+			if (Trigger > 0)
+			{
+				_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
+			}
+			else
+			{
+				_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
+			}
 
-		_rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
-		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
-		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
+			_rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
+			_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
+			_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
-		if (_isFiringRight)
-		{
-			AudioManager.Instance.Play(LazerSfx, transform.position);
+			if (_isFiringRight)
+			{
+				AudioManager.Instance.Play(LazerSfx, transform.position);
 
-			InstantiateProjectile(SpawnLeft);
-			InstantiateProjectile(SpawnRight);
-			_isFiringRight = false;
+				InstantiateProjectile(SpawnLeft);
+				InstantiateProjectile(SpawnRight);
+				_isFiringRight = false;
+			}
 		}
 	}
 
@@ -94,13 +102,22 @@ public class Spaceship : MoveableBase {
 			if (_currentHealth <= 0)
 			{
 				AudioManager.Instance.Play(ExplosionSfx, transform.position);
-				Destroy(Mesh);
+				_fracturedObject.Explode(c.transform.position, 100f);
+				_isDead = true;
+				//Destroy(Mesh);
 			}
 			else
 			{
 				AudioManager.Instance.Play(HitSfx, transform.position);
 			}
 		}
+	}
+
+	void OnCollisionEnter(Collision c)
+	{
+		AudioManager.Instance.Play(ExplosionSfx, transform.position);
+		_fracturedObject.Explode(c.contacts[0].point, 100f);
+		_isDead = true;
 	}
 
 	#endregion
