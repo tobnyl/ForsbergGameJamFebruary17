@@ -17,6 +17,7 @@ public class Diamond : MonoBehaviour
 	public Audio HitSfx;
 
 	private FracturedObject _fracturedObject;
+	public bool IsExploded;
 
 	#endregion
 	#region Events
@@ -51,6 +52,7 @@ public class Diamond : MonoBehaviour
 				AudioManager.Instance.Play(ExplosionSfx, transform.position);				
 				_fracturedObject.Explode(c.transform.position, 100f);
 				Destroy(Collider);
+				IsExploded = true;
 			}
 			else {
 				AudioManager.Instance.Play(HitSfx, transform.position);

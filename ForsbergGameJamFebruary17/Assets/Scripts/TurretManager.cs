@@ -66,7 +66,7 @@ public class TurretManager : MonoBehaviour
 			SwitchTurret(_currentTurretIndex);
 		}
 
-		Debug.Log(_currentTurretIndex);
+		//Debug.Log(_currentTurretIndex);
 	}
 	
 	#endregion
