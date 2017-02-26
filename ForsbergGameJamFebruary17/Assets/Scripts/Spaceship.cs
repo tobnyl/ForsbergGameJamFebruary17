@@ -10,6 +10,7 @@ public class Spaceship : MoveableBase {
 	public Audio AmbientSfx;
 	public Audio ExplosionSfx;
 	public Audio HitSfx;
+	public GameObject Particles;
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -104,6 +105,7 @@ public class Spaceship : MoveableBase {
 				AudioManager.Instance.Play(ExplosionSfx, transform.position);
 				_fracturedObject.Explode(c.transform.position, 100f);
 				_isDead = true;
+				Destroy(Particles);
 				//Destroy(Mesh);
 			}
 			else
@@ -117,6 +119,7 @@ public class Spaceship : MoveableBase {
 	{
 		AudioManager.Instance.Play(ExplosionSfx, transform.position);
 		_fracturedObject.Explode(c.contacts[0].point, 100f);
+		Destroy(Particles);
 		_isDead = true;
 	}
 
