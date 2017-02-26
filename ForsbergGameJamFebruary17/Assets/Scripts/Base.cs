@@ -9,6 +9,7 @@ public class Base : MonoBehaviour
 	#region Fields/Properties
 
 	public FracturedObject Mitten;
+	public GameObject LoadingScreen;
 
 	private List<Diamond> diamondList;
 	
@@ -42,6 +43,7 @@ public class Base : MonoBehaviour
 
 	public void LoadGameOverScreen()
 	{
+		LoadingScreen.gameObject.SetActive(true);
 		SceneManager.LoadScene("GameOver");
 	}
 

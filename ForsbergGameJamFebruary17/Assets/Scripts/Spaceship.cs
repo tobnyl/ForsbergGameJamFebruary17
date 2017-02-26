@@ -12,6 +12,7 @@ public class Spaceship : MoveableBase {
 	public Audio ExplosionSfx;
 	public Audio HitSfx;
 	public GameObject Particles;
+	public GameObject LoadingScreen;
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -107,6 +108,7 @@ public class Spaceship : MoveableBase {
 				_isDead = true;
 				Destroy(Particles);
 				//Destroy(Mesh);
+				
 				Invoke("LoadGameOverScreen", GameManager.Instance.TimeAfterDeath);
 			}
 			else
@@ -122,6 +124,7 @@ public class Spaceship : MoveableBase {
 		_fracturedObject.Explode(c.contacts[0].point, 100f);
 		Destroy(Particles);
 		_isDead = true;
+
 		Invoke("LoadGameOverScreen", GameManager.Instance.TimeAfterDeath);
 	}
 
@@ -130,6 +133,7 @@ public class Spaceship : MoveableBase {
 
 	public void LoadGameOverScreen()
 	{
+		LoadingScreen.gameObject.SetActive(true);
 		SceneManager.LoadScene("GameOver");
 	}
 
