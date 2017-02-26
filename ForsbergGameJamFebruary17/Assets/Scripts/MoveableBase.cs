@@ -44,7 +44,7 @@ public class MoveableBase : MonoBehaviour
 
 	protected bool FireButtonDown
 	{
-		get { return Input.GetButtonDown("Fire" + Index); }
+		get { return Input.GetButton("Fire" + Index); }
 	}
 
 	#endregion
