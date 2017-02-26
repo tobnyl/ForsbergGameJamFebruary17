@@ -22,7 +22,12 @@ public class Turret : MoveableBase
 	private float _currentCannonAngleX;
 	private List<MeshRenderer> _meshRenderers;
 
+	public Camera _camera;
 
+	public bool CameraEnabled
+	{
+		set { _camera.gameObject.SetActive(value); }
+	}
 
 	#endregion
 	#region Events
@@ -31,6 +36,8 @@ public class Turret : MoveableBase
 	{
 		_meshRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
 		_currentHealth = StartHealth;
+
+		_camera = GetComponentInChildren<Camera>();
 	}
 	
 	void Start() 
