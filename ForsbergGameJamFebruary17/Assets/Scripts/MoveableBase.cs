@@ -6,6 +6,7 @@ public class MoveableBase : MonoBehaviour
 	#region Fields/Properties
 
 	public int Index;
+	public Audio LazerSfx;
 
 	[Header("Projectile")]
 	public GameObject ProjecitlePrefab;

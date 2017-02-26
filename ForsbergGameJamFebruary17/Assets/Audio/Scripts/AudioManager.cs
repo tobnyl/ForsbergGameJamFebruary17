@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
     public Audio Music;
 	public MinMax MusicLowPassCutoffFreq;
 	public bool MuteAllSfx;
+	public GameObject Canvas;
 
 	#endregion
 	#region Properties

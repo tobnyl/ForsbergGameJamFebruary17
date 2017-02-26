@@ -59,6 +59,8 @@ public class Turret : MoveableBase
 			InstantiateProjectile(SpawnLeft);
 			InstantiateProjectile(SpawnRight);
 			_isFiringRight = false;
+
+			AudioManager.Instance.Play(LazerSfx, transform.position);
 		}
 	}
 

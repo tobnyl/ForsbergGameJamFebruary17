@@ -7,6 +7,7 @@ public class Spaceship : MoveableBase {
 	#region Fields/Properties
 
 	public GameObject Mesh;
+	
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -69,7 +70,8 @@ public class Spaceship : MoveableBase {
 
 		if (_isFiringRight)
 		{
-			
+			AudioManager.Instance.Play(LazerSfx, transform.position);
+
 			InstantiateProjectile(SpawnLeft);
 			InstantiateProjectile(SpawnRight);
 			_isFiringRight = false;
