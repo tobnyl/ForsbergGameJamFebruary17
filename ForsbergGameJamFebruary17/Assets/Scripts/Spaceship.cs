@@ -7,7 +7,7 @@ public class Spaceship : MoveableBase {
 	#region Fields/Properties
 
 	public GameObject Mesh;
-	
+	public Audio AmbientSfx;
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -41,6 +41,7 @@ public class Spaceship : MoveableBase {
 
 	void Start()
 	{
+		AudioManager.Instance.Play(AmbientSfx, transform.position);
 	}
 
 	void Update()
