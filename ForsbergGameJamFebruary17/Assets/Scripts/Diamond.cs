@@ -14,6 +14,7 @@ public class Diamond : MonoBehaviour
 	public float ExplosionForce = 1;
 
 	public Audio ExplosionSfx;
+	public Audio HitSfx;
 
 	private FracturedObject _fracturedObject;
 
@@ -50,6 +51,9 @@ public class Diamond : MonoBehaviour
 				AudioManager.Instance.Play(ExplosionSfx, transform.position);				
 				_fracturedObject.Explode(c.transform.position, 100f);
 				Destroy(Collider);
+			}
+			else {
+				AudioManager.Instance.Play(HitSfx, transform.position);
 			}
 		}
 	}
