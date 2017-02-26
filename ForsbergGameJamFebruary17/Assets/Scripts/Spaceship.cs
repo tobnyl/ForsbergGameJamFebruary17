@@ -14,6 +14,7 @@ public class Spaceship : MoveableBase {
 	public float IdleForce = 1;
 
 	[Header("Torque")]
+	public bool InvertedPitch = true;
 	public float PitchTorque = 1;
 	public float YawTorque = 1;
 	public float RollTorque = 1;
@@ -64,7 +65,7 @@ public class Spaceship : MoveableBase {
 			_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
 		}
 
-		_rigidbody.AddTorque(transform.right * -AxisLeft.y * PitchTorque);
+		_rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
 		_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
 		_rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
 
