@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Base : MonoBehaviour 
 {
@@ -32,14 +33,18 @@ public class Base : MonoBehaviour
 		{
 			Debug.Log("Explode base!!!");
 			Mitten.Explode(Mitten.gameObject.transform.position, 100f);
+			Invoke("LoadGameOverScreen", GameManager.Instance.TimeAfterDeath);
 		}
 	}
-	
+
 	#endregion
 	#region Methods
-	
-	
-	
+
+	public void LoadGameOverScreen()
+	{
+		SceneManager.LoadScene("GameOver");
+	}
+
 	#endregion
-	
+
 }

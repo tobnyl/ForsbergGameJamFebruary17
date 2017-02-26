@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spaceship : MoveableBase {
 
@@ -71,10 +72,9 @@ public class Spaceship : MoveableBase {
 			{
 				_rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
 			}
-			else
-			{
-				_rigidbody.AddForce(transform.forward * Trigger * IdleForce);
-			}
+
+			_rigidbody.AddForce(transform.forward * IdleForce);
+
 
 			_rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
 			_rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
@@ -107,6 +107,7 @@ public class Spaceship : MoveableBase {
 				_isDead = true;
 				Destroy(Particles);
 				//Destroy(Mesh);
+				Invoke("LoadGameOverScreen", GameManager.Instance.TimeAfterDeath);
 			}
 			else
 			{
@@ -121,12 +122,16 @@ public class Spaceship : MoveableBase {
 		_fracturedObject.Explode(c.contacts[0].point, 100f);
 		Destroy(Particles);
 		_isDead = true;
+		Invoke("LoadGameOverScreen", GameManager.Instance.TimeAfterDeath);
 	}
 
 	#endregion
 	#region Methods
 
-
+	public void LoadGameOverScreen()
+	{
+		SceneManager.LoadScene("GameOver");
+	}
 
 	#endregion
 }

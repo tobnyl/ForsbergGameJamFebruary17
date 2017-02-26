@@ -7,26 +7,29 @@ public class GameManager : MonoBehaviour
 
     public float DestroyItemAfterTime;
 	public GameObject DetachedChunkParent;
+	public float TimeAfterDeath = 10;
 
 
 	public Audio Test;
 
-    private static GameManager _instance;
+	private static GameManager _instance;
 
-    public static GameManager Instance
-    {
-        get { return _instance; }
-    }
-
-    #endregion
-    #region Events
-
-    void Awake()
+	public static GameManager Instance
 	{
-        if (_instance != null)
-        {
-            _instance = this;
-        }
+		get { return _instance; }
+	}
+
+	#endregion
+	#region Events
+
+	void Awake()
+	{
+		if (_instance == null)
+		{
+			_instance = this;
+		}
+
+		//DontDestroyOnLoad(gameObject);
 	}
 	
 	void Start() 
