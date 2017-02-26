@@ -34,10 +34,7 @@ public class TurretManager : MonoBehaviour
 	{
 		Count = Turrets.Length;
 
-		foreach (var turret in Turrets)
-		{
-			turret.CameraEnabled = false;
-		}
+		DisableAllTurretCameras();
 
 		_currentTurret = Turrets.First();
 		_currentTurret.CameraEnabled = true;
@@ -53,6 +50,8 @@ public class TurretManager : MonoBehaviour
 			{
 				_currentTurretIndex = Count - 1;
 			}
+
+			SwitchTurret(_currentTurretIndex);
 		}
 
 		if (NextTurretButton)
@@ -63,6 +62,8 @@ public class TurretManager : MonoBehaviour
 			{
 				_currentTurretIndex = 0;
 			}
+
+			SwitchTurret(_currentTurretIndex);
 		}
 
 		Debug.Log(_currentTurretIndex);
@@ -71,7 +72,21 @@ public class TurretManager : MonoBehaviour
 	#endregion
 	#region Methods
 	
-	
+	private void SwitchTurret(int index)
+	{
+		DisableAllTurretCameras();
+
+		_currentTurret = Turrets[index];
+		_currentTurret.CameraEnabled = true;
+	}
+
+	private void DisableAllTurretCameras()
+	{
+		foreach (var turret in Turrets)
+		{
+			turret.CameraEnabled = false;
+		}
+	}
 	
 	#endregion
 	
