@@ -8,6 +8,8 @@ public class Spaceship : MoveableBase {
 
 	public GameObject Mesh;
 	public Audio AmbientSfx;
+	public Audio ExplosionSfx;
+	public Audio HitSfx;
 
 	[Header("Force")]
 	public float ForwardForce = 1;
@@ -91,7 +93,12 @@ public class Spaceship : MoveableBase {
 
 			if (_currentHealth <= 0)
 			{
+				AudioManager.Instance.Play(ExplosionSfx, transform.position);
 				Destroy(Mesh);
+			}
+			else
+			{
+				AudioManager.Instance.Play(HitSfx, transform.position);
 			}
 		}
 	}
